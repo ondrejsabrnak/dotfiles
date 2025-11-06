@@ -1,56 +1,67 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="../.."
+# Zjisti adresář, kde leží tento skript (funguje i přes symlinky)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 OUT="$ROOT_DIR/mac/Brewfile"
 
+# Kontrola, zda je brew nainstalovaný
+if ! command -v brew >/dev/null 2>&1; then
+    echo "❌ Error: Homebrew is not installed" >&2
+    exit 1
+fi
+
+# Vytvoř adresář, pokud neexistuje
 mkdir -p "$ROOT_DIR/mac"
 
+# Inicializuj soubor
 echo 'tap "homebrew/bundle"' > "$OUT"
 
-# --- TAPS
-if command -v brew >/dev/null 2>&1; then
-  brew tap | sort -u | while read -r tap; do
-    # homebrew/core a homebrew/cask zapisovat nemusíme, ale nevadí to
+# --- TAPS ---
+echo "Collecting taps..."
+brew tap | sort -u | while read -r tap; do
     echo "tap \"$tap\"" >> "$OUT"
-  done
-fi
-
+done
 echo >> "$OUT"
 
-# --- FORMULAE (jen leaves = bez závislostí)
-if command -v brew >/dev/null 2>&1; then
-  echo "# Formulae (top-level leaves)" >> "$OUT"
-  brew leaves | sort -u | while read -r f; do
+# --- FORMULAE (jen leaves = bez závislostí) ---
+echo "Collecting formulae..."
+echo "# Formulae (top-level leaves)" >> "$OUT"
+brew leaves | sort -u | while read -r f; do
     echo "brew \"$f\"" >> "$OUT"
-  done
-fi
-
+done
 echo >> "$OUT"
 
-# --- CASKS
-if command -v brew >/dev/null 2>&1; then
-  echo "# Casks" >> "$OUT"
-  brew list --cask -1 2>/dev/null | sort -u | while read -r c; do
+# --- CASKS ---
+echo "Collecting casks..."
+echo "# Casks" >> "$OUT"
+if brew list --cask -1 2>/dev/null | sort -u | while read -r c; do
     echo "cask \"$c\"" >> "$OUT"
-  done
+done; then
+    :
+else
+    echo "# No casks installed" >> "$OUT"
 fi
-
 echo >> "$OUT"
 
-# --- MAS (pokud je k dispozici)
+# --- MAS (pokud je k dispozici) ---
 if command -v mas >/dev/null 2>&1; then
-  echo "# Mac App Store apps" >> "$OUT"
-  # mas list -> "123456789 App Name (1.2.3)"
-  mas list | while read -r line; do
-    id="$(awk '{print $1}' <<< "$line")"
-    # název: vše kromě prvního slova a závorky s verzí
-    name="$(sed -E 's/^[0-9]+ (.+) \([^)]+\)$/\1/' <<< "$line")"
-    # Ošetření uvozovek v názvu
-    name_escaped="${name//\"/\\\"}"
-    echo "mas \"$name_escaped\", id: $id" >> "$OUT"
-  done
+    echo "Collecting Mac App Store apps..."
+    echo "# Mac App Store apps" >> "$OUT"
+    mas list | while IFS= read -r line; do
+        # Bezpečnější parsování: ID je první slovo
+        id="$(echo "$line" | awk '{print $1}')"
+        # Název: vše mezi ID a poslední závorkou
+        name="$(echo "$line" | sed -E "s/^[0-9]+ (.+) \([^)]+\)$/\1/")"
+        # Escape uvozovky a backslashe
+        name="${name//\\/\\\\}"
+        name="${name//\"/\\\"}"
+        echo "mas \"$name\", id: $id" >> "$OUT"
+    done
+else
+    echo "# mas-cli not installed - skipping Mac App Store apps" >> "$OUT"
 fi
 
 echo
-echo "Generated $OUT ✅"
+echo "✅ Generated $OUT"

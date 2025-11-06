@@ -1,4 +1,5 @@
 tap "homebrew/bundle"
+tap "sikalabs/tap"
 
 # Formulae (top-level leaves)
 brew "argocd"
@@ -10,11 +11,14 @@ brew "k9s"
 brew "kube-ps1"
 brew "kubectx"
 brew "kustomize"
+brew "mas"
 brew "midnight-commander"
 brew "node"
 brew "openjdk"
 brew "openshift-cli"
+brew "sikalabs/tap/slu"
 brew "telnet"
+brew "terraform"
 brew "wakeonlan"
 brew "watch"
 brew "yq"
@@ -32,6 +36,7 @@ cask "balenaetcher"
 cask "battle-net"
 cask "bitwarden"
 cask "chatgpt"
+cask "claude"
 cask "curseforge"
 cask "cyberduck"
 cask "dictionaries"
@@ -52,3 +57,17 @@ cask "visual-studio-code"
 cask "vlc"
 cask "warp"
 
+# Mac App Store apps
+mas " 1Password for Safari ", id: 1569813296
+mas "  Amphetamine          ", id: 937984704
+mas " Clamshell            ", id: 6477896729
+mas "  Keynote              ", id: 409183694
+mas "  LanScan              ", id: 472226235
+mas "  Microsoft Excel      ", id: 462058435
+mas "  Microsoft Outlook    ", id: 985367838
+mas "  Microsoft PowerPoint ", id: 462062816
+mas "  Microsoft Word       ", id: 462054704
+mas "  Numbers              ", id: 409203825
+mas "  Pages                ", id: 409201541
+mas " Pure Paste           ", id: 1611378436
+mas " Windows App          ", id: 1295203466
