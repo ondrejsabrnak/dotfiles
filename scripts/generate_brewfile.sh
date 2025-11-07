@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Zjisti adresář, kde leží tento skript (funguje i přes symlinky)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 OUT="$ROOT_DIR/mac/Brewfile"
 
 # Kontrola, zda je brew nainstalovaný
