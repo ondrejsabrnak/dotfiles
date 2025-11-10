@@ -43,7 +43,6 @@ cask "dictionaries"
 cask "discord"
 cask "fleet"
 cask "ghostty"
-cask "mic-drop"
 cask "microsoft-edge"
 cask "microsoft-onenote"
 cask "proton-mail"
@@ -64,6 +63,7 @@ mas "  Amphetamine          ", id: 937984704
 mas " Clamshell            ", id: 6477896729
 mas "  Keynote              ", id: 409183694
 mas "  LanScan              ", id: 472226235
+mas " Mic Drop             ", id: 1489816366
 mas "  Microsoft Excel      ", id: 462058435
 mas "  Microsoft Outlook    ", id: 985367838
 mas "  Microsoft PowerPoint ", id: 462062816
