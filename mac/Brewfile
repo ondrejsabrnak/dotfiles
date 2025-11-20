@@ -59,20 +59,20 @@ cask "telegram"
 cask "utm"
 cask "visual-studio-code"
 cask "vlc"
-cask "warp"
+cask "windsurf"
 
 # Mac App Store apps
 mas " 1Password for Safari ", id: 1569813296
-mas "  Amphetamine          ", id: 937984704
+mas " 937984704  Amphetamine           (5.3.2)", id: 937984704
 mas " Clamshell            ", id: 6477896729
-mas "  Keynote              ", id: 409183694
-mas "  LanScan              ", id: 472226235
+mas " 409183694  Keynote               (14.4)", id: 409183694
+mas " 472226235  LanScan               (8.0.23)", id: 472226235
 mas " Mic Drop             ", id: 1489816366
-mas "  Microsoft Excel      ", id: 462058435
-mas "  Microsoft Outlook    ", id: 985367838
-mas "  Microsoft PowerPoint ", id: 462062816
-mas "  Microsoft Word       ", id: 462054704
-mas "  Numbers              ", id: 409203825
-mas "  Pages                ", id: 409201541
+mas " 462058435  Microsoft Excel       (16.101.3)", id: 462058435
+mas " 985367838  Microsoft Outlook     (16.101.3)", id: 985367838
+mas " 462062816  Microsoft PowerPoint  (16.103)", id: 462062816
+mas " 462054704  Microsoft Word        (16.102.2)", id: 462054704
+mas " 409203825  Numbers               (14.4)", id: 409203825
+mas " 409201541  Pages                 (14.4)", id: 409201541
 mas " Pure Paste           ", id: 1611378436
 mas " Windows App          ", id: 1295203466
